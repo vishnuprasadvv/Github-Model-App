@@ -50,5 +50,11 @@ export class UserService {
             data: {...updates},
         });
     }
+
+    async getAllUsersSorted(sortField: string) {
+        return await prisma.user.findMany({
+          orderBy: { [sortField]: 'desc' },
+        });
+      }
 };
 

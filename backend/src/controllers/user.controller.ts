@@ -48,4 +48,20 @@ export class UserController {
             res.status(500).json({ error: 'An unknown error occurred' });
         }
     }
+
+
+    async getUsersSorted(req: Request, res: Response) {
+        try {
+          const { sortField } = req.query;
+          const users = await userService.getAllUsersSorted(sortField as string);
+          res.status(200).json(users);
+        } catch (error:unknown) {
+         if (error instanceof Error) {
+                res.status(500).json({ error: error.message });
+                return;
+            }
+            res.status(500).json({ error: 'An unknown error occurred' });
+        }
+      };
+
 }

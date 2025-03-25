@@ -7,6 +7,7 @@ const userController = new UserController();
 router.get('/:username', userController.fetchUser);
 router.put('/:username', userController.updateUser);
 router.delete('/:username', userController.deleteUser);
+router.get('/sorted', userController.getUsersSorted);
 
 
 export default router;
