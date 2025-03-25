@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int          @id @default(autoincrement())
+  username       String       @unique
+  name           String
+  location       String?
+  bio            String?
+  blog           String?
+  avatarUrl      String?
+  publicRepos    Int
+  publicGists    Int
+  followersCount Int
+  followingCount Int
+  isDeleted      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime @updatedAt
+  friends        Friendship[] @relation("UserFriends")
+  friendOf       Friendship[] @relation("UserFriendOf")
+}
+
+model Friendship {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation("UserFriends", fields: [userId], references: [id])
+  userId    Int
+  friend    User     @relation("UserFriendOf", fields: [friendId], references: [id])
+  friendId  Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, friendId]) // Ensure unique friendships
+}
