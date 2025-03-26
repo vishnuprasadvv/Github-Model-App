@@ -54,8 +54,11 @@ export class UserController {
 
     async getUsersSorted(req: Request, res: Response) {
         try {
-          const { sortField } = req.query;
-          const users = await userService.getAllUsersSorted(sortField as string);
+          let { sortBy, order } = req.query;
+          type TOrder = 'asc' | 'desc';
+
+          console.log(sortBy, order)
+          const users = await userService.getAllUsersSorted(sortBy as string, order as TOrder);
           res.status(200).json(users);
         } catch (error:unknown) {
          if (error instanceof Error) {

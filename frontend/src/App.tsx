@@ -1,5 +1,4 @@
 
-import { useState } from 'react'
 import './App.css';
 import axios from 'axios';
 import { IFollower, IRepo, IUser } from './types';
@@ -7,10 +6,12 @@ import RepoList from './components/RepoList';
 import UserProfile from './components/UserProfile';
 import FollowersList from './components/FollowersList';
 import RepoDetail from './components/RepoDetails';
+import { useState } from 'react';
+import UserList from './components/UserList';
 
 const API_URL = "http://localhost:3000/api/users";
 
-type ViewType = "search" | "repos" | "repoDetail" | "followers";
+type ViewType = "search" | "repos" | "repoDetail" | "followers" | "userList";
 
 function App() {
   const [username, setUsername] = useState<string>('');
@@ -18,13 +19,22 @@ function App() {
   const [repos, setRepos] = useState<IRepo[]>([]);
   const [followers, setFollowers] = useState<IFollower[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<IRepo | null>(null);
-  const [view, setView] = useState<ViewType>("search");
+  const [view, setView] = useState<ViewType>("userList");
 
-  const handleSearch = async () => {
-    if(!username) return alert('Please enter a username');
+  //search function
+  const handleSearch = async (targetUsername : string = username) => {
+
+    console.log(targetUsername)
+    if(!targetUsername) return alert('Please enter a username');
+     
+  setView("search");
+  setUserData(null); 
+  setRepos([]);
+  setFollowers([]);
 
     try {
-      const userResponse = await axios.get<IUser & { repos: IRepo[] }>(`${API_URL}/${username}`);
+      const userResponse = await axios.get<IUser & { repos: IRepo[] }>(`${API_URL}/${targetUsername}`);
+
       console.log(userResponse.data)
       setUserData(userResponse.data);
       setRepos(userResponse.data.repositories);
@@ -46,9 +56,11 @@ function App() {
     }
   };
 
+
+
   const handleSelectFollower = (followerUsername: string) => {
     setUsername(followerUsername);
-    handleSearch();
+    handleSearch(followerUsername)
   };
 
   const handleSelectRepo = (repo:IRepo) =>{
@@ -68,7 +80,7 @@ function App() {
           onChange={(e) => setUsername(e.target.value)}
           className="input"
         />
-        <button onClick={handleSearch} className="btn-search">
+        <button onClick={() => handleSearch()} className="btn-search">
           Search
         </button>
       </div>
@@ -92,6 +104,8 @@ function App() {
           onSelectUser={handleSelectFollower}
         />
       )}
+
+{view === "userList" && <UserList onSelectUser={handleSearch} />}
 
       {view !== "search" && (
         <button onClick={() => setView("repos")}>Back to Repos</button>

@@ -2,9 +2,7 @@
 
 .main {
      padding: "20px";
-     max-width: "800px";
       margin: "auto";
-     background-color:rgb(250, 250, 250);
      width: 100vw;
      min-height: 100vh;
 }
@@ -17,6 +15,8 @@
     gap: 20px;
     max-width: 1000px;
     margin: 0 auto;
+    background-color: rgb(251, 251, 251);
+    padding: 20px;
   }
   
   /* Individual Repo Item */
@@ -88,7 +88,7 @@
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    max-width: 600px;
+    max-width: 1000px;
     margin: 20px auto;
     transition: transform 0.3s ease;
   }
@@ -168,7 +168,6 @@
   /* Container */
 .github-search-container {
     text-align: center;
-    margin-top: 50px;
   }
   
   /* Title */
@@ -204,12 +203,13 @@
 
   /* Container */
 .followers-container {
-    margin-top: 20px;
+    margin: 20px auto;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
-    max-width: 600px;
+    max-width: 1000px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
   }
   
   /* Title */
@@ -225,7 +225,7 @@
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
   }
   
@@ -237,6 +237,7 @@
     border: 1px solid #eee;
     border-radius: 8px;
     transition: box-shadow 0.3s;
+    cursor: pointer;
   }
   
   .follower-item:hover {
@@ -249,16 +250,10 @@
     margin-right: 10px;
   }
   
-  /* Button */
-  .follower-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+.follower-name {
+  font-weight: bold;
+  padding-left: 5px;
+}
   
   .follower-btn:hover {
     background-color: #0056b3;
@@ -271,7 +266,7 @@
     display: flex;
     align-items: flex-start;
     gap: 30px;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 20px;
     border: 1px solid #ddd;
@@ -336,7 +331,6 @@
     font-size: 16px;
     color: #586069;
     line-height: 1.6;
-    margin: 20px 0;
   }
   
   /* Strong emphasis */
@@ -350,7 +344,7 @@
     margin: 20px 0;
     padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     background: #28a745;
     color: white;
     font-size: 14px;
@@ -365,12 +359,12 @@
   
   /* Back button */
   .back-button {
-    margin-top: 15px;
-    padding: 8px 12px;
+    margin: 20px 0;
+    padding: 10px 20px;
     background-color: #6c757d;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
   }
@@ -379,3 +373,143 @@
     background-color: #495057;
   }
   
+
+
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Sorting Controls */
+.sortControls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.select:hover {
+  border-color: #2c3e50;
+}
+
+/* User List */
+.userList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+/* User Card */
+.userCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.userCard:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Avatar */
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+/* User Info */
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Username */
+.username {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  border: none; 
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.username:hover {
+  color: #1a73e8;
+}
+
+/* User Details */
+.details {
+  font-size: 0.9rem;
+  color: #555;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.details p {
+  margin: 0;
+
+}
+
+/* No Users */
+.noUsers {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 30px;
+}
+
+
+
+.view-profile-button {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #28a745;
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.view-profile-button:hover {
+  background: #218838;
+}

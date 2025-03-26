@@ -87,9 +87,9 @@ export class UserService {
         });
     }
 
-    async getAllUsersSorted(sortField: string) {
+    async getAllUsersSorted(sortBy: string = 'username', order: 'asc' | 'desc') {
         return await prisma.user.findMany({
-          orderBy: { [sortField]: 'desc' },
+          orderBy: { [sortBy]: order },
         });
       }
 };

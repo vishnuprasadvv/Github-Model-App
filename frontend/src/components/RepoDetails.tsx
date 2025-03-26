@@ -30,15 +30,16 @@ const RepoDetail: React.FC<Props> = ({ repo, onBack }) => {
     {/* Right Section */}
     <div className="repo-right">
       <h2 className="repo-title">{repo.name}</h2>
-      <p className="repo-description">
-        <span className="">{repo.description}</span>
-      </p>
-
       <button
         className="repo-action"
       >
         Set up a plan
       </button>
+      <p className="repo-description">
+        <span className="">{repo.description}</span>
+      </p>
+
+      
 
       <br />
       <button onClick={onBack} className="back-button">

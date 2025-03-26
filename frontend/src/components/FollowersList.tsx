@@ -12,19 +12,19 @@ const FollowersList: React.FC<Props> = ({ followers, onSelectUser }) => {
     <h3 className="followers-title">Followers</h3>
     <ul className="followers-list">
       {followers.map((follower) => (
-        <li key={follower.id} className="follower-item">
+        <li key={follower.id} >
+          <div className="follower-item"
+           onClick={() => onSelectUser(follower.login)}>
           <img
             src={follower.avatar_url}
             alt={follower.login}
             width="50"
             className="follower-avatar"
           />
-          <button
-            onClick={() => onSelectUser(follower.login)}
-            className="follower-btn"
-          >
-            {follower.login}
-          </button>
+          <span className="follower-name">{follower.login}</span>
+          
+          </div>
+          
         </li>
       ))}
     </ul>
