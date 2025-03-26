@@ -171,9 +171,14 @@
   }
   
   /* Title */
-  .title {
+  .main-title {
     font-size: 28px;
     margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .main-title:hover {
+    color: #004ba1;
   }
   
   /* Input Field */
@@ -265,9 +270,9 @@
 .repo-detail-container {
     display: flex;
     align-items: flex-start;
-    gap: 30px;
+    gap: 40px;
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 0px auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 16px;
@@ -291,10 +296,18 @@
   .verified-badge {
     display: flex;
     align-items: center;
-    gap: 8px;
+    flex-direction: column;
     font-size: 14px;
     color: #6a737d;
     margin: 10px 0;
+  }
+
+  .verified-badge p {
+    font-size : 12px;
+  }
+
+  .verified-badge p span {
+    color: #0366d6;
   }
   
   /* Categories */
@@ -313,10 +326,20 @@
     color: #0366d6;
     text-decoration: none;
   }
+
+  .repo-details-category-heading {
+    text-align: start;
+    color: #6a737d;
+  }
   
   /* Right section - Content */
   .repo-right {
     flex: 1;
+  }
+
+  .repo-right .heading {
+    text-align: start;
+    color: #6a737d;
   }
   
   /* Title */
@@ -396,6 +419,7 @@
 .sortControls {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -434,7 +458,6 @@
   border: 1px solid #eee;
   border-radius: 8px;
   transition: box-shadow 0.3s, transform 0.3s;
-  cursor: pointer;
 }
 
 .userCard:hover {
@@ -512,4 +535,61 @@
 
 .view-profile-button:hover {
   background: #218838;
+}
+
+.back-to-repo-btn {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: rgb(61, 61, 61);
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.back-to-repo-btn:hover {
+  background: #24292e;
+}
+
+.back-button-div{
+  margin: auto;
+  max-width: 1000px;
+}
+
+.loading-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.no-results-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.go-home-btn{
+  display: inline-block;
+  margin: 5px 0;
+  padding: 10px 20px;
+  border: 1px solid rgb(61, 61, 61);
+  border-radius: 5px ;
+  color: rgb(61, 61, 61);
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.go-home-btn:hover {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
 }

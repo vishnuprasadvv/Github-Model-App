@@ -1,54 +1,57 @@
-
-import './App.css';
-import axios from 'axios';
-import { IFollower, IRepo, IUser } from './types';
-import RepoList from './components/RepoList';
-import UserProfile from './components/UserProfile';
-import FollowersList from './components/FollowersList';
-import RepoDetail from './components/RepoDetails';
-import { useState } from 'react';
-import UserList from './components/UserList';
+import "./App.css";
+import axios from "axios";
+import { IFollower, IRepo, IUser } from "./types";
+import RepoList from "./components/RepoList";
+import UserProfile from "./components/UserProfile";
+import FollowersList from "./components/FollowersList";
+import RepoDetail from "./components/RepoDetails";
+import { useState } from "react";
+import UserList from "./components/UserList";
 
 const API_URL = "http://localhost:3000/api/users";
 
 type ViewType = "search" | "repos" | "repoDetail" | "followers" | "userList";
 
 function App() {
-  const [username, setUsername] = useState<string>('');
+  const [username, setUsername] = useState<string>("");
   const [userData, setUserData] = useState<IUser | null>(null);
   const [repos, setRepos] = useState<IRepo[]>([]);
   const [followers, setFollowers] = useState<IFollower[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<IRepo | null>(null);
   const [view, setView] = useState<ViewType>("userList");
+  const [loading, setLoading] = useState(false);
 
   //search function
-  const handleSearch = async (targetUsername : string = username) => {
+  const handleSearch = async (targetUsername: string = username) => {
+    if (!targetUsername) return alert("Please enter a username");
+    setLoading(true);
 
-    console.log(targetUsername)
-    if(!targetUsername) return alert('Please enter a username');
-     
-  setView("search");
-  setUserData(null); 
-  setRepos([]);
-  setFollowers([]);
+    setView("search");
+    setUserData(null);
+    setRepos([]);
+    setFollowers([]);
 
     try {
-      const userResponse = await axios.get<IUser & { repos: IRepo[] }>(`${API_URL}/${targetUsername}`);
+      const userResponse = await axios.get<IUser & { repos: IRepo[] }>(
+        `${API_URL}/${targetUsername}`
+      );
 
-      console.log(userResponse.data)
       setUserData(userResponse.data);
       setRepos(userResponse.data.repositories);
       setView("repos");
     } catch (error) {
       alert("Error fetching user data");
       console.error(error);
+    }finally{
+      setLoading(false);
     }
-  }
+  };
 
   const handleShowFollowers = async () => {
     try {
-      const response = await axios.get<IFollower[]>(`${userData?.followersUrl}`);
-      console.log(response)
+      const response = await axios.get<IFollower[]>(
+        `${userData?.followersUrl}`
+      );
       setFollowers(response.data);
       setView("followers");
     } catch (error) {
@@ -56,37 +59,58 @@ function App() {
     }
   };
 
-
-
   const handleSelectFollower = (followerUsername: string) => {
     setUsername(followerUsername);
-    handleSearch(followerUsername)
+    handleSearch(followerUsername);
   };
 
-  const handleSelectRepo = (repo:IRepo) =>{
+  const handleSelectRepo = (repo: IRepo) => {
     setSelectedRepo(repo);
-    setView('repoDetail');
+    setView("repoDetail");
+  };
+
+  const handleGoToHome = () => {
+    setView('userList');
+    setUsername('');
   }
 
   return (
-    <div className='main'>
+    <div className="main">
       <div className="github-search-container">
-      <h1 className="title">🔍 GitHub Search App</h1>
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Enter GitHub Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="input"
-        />
-        <button onClick={() => handleSearch()} className="btn-search">
-          Search
-        </button>
+        <h1 className="main-title" onClick={handleGoToHome}>
+          🔍 GitHub Search App
+        </h1>
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Enter GitHub Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="input"
+          />
+          <button onClick={() => handleSearch()} className="btn-search">
+            Search
+          </button>
+        </div>
       </div>
-    </div>
 
-      {userData && (
+
+    {loading ? (
+      <div className="loading-div">
+        <h2>Loading...</h2>
+      </div>
+    ) : (
+      <div>
+
+        { username.length && userData === null && (
+           <div className="no-results-div">
+           <h2>No Results.</h2>
+           <button 
+           onClick={handleGoToHome}
+           className="go-home-btn">Go to home</button>
+         </div>
+        )}
+ {userData && view !== "userList" && view !== "repoDetail" && (
         <UserProfile user={userData} onShowFollowers={handleShowFollowers} />
       )}
 
@@ -94,25 +118,23 @@ function App() {
         <RepoList repos={repos} onSelectRepo={handleSelectRepo} />
       )}
 
-{view === "repoDetail" && selectedRepo && (
+      {view === "repoDetail" && selectedRepo && (
         <RepoDetail repo={selectedRepo} onBack={() => setView("repos")} />
       )}
 
-       {view === "followers" && (
+      {view === "followers" && (
         <FollowersList
           followers={followers}
           onSelectUser={handleSelectFollower}
         />
       )}
 
-{view === "userList" && <UserList onSelectUser={handleSearch} />}
-
-      {view !== "search" && (
-        <button onClick={() => setView("repos")}>Back to Repos</button>
-      )}
-    
+      {view === "userList" && <UserList onSelectUser={handleSearch} />}
+      </div>
+    )}
+     
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
