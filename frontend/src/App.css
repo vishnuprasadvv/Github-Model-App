@@ -567,6 +567,12 @@
   height: 90vh;
 }
 
+.empty-repo-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .no-results-div{
   display: flex;
   flex-direction: column;

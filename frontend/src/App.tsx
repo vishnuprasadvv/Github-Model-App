@@ -94,7 +94,6 @@ function App() {
         </div>
       </div>
 
-
     {loading ? (
       <div className="loading-div">
         <h2>Loading...</h2>
@@ -102,7 +101,7 @@ function App() {
     ) : (
       <div>
 
-        { username.length && userData === null && (
+        { username.length !== 0 && userData === null && (
            <div className="no-results-div">
            <h2>No Results.</h2>
            <button 
@@ -110,6 +109,7 @@ function App() {
            className="go-home-btn">Go to home</button>
          </div>
         )}
+        
  {userData && view !== "userList" && view !== "repoDetail" && (
         <UserProfile user={userData} onShowFollowers={handleShowFollowers} />
       )}

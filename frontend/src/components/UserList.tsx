@@ -67,7 +67,6 @@ const UserList: React.FC<Props> = ({ onSelectUser }) => {
                 className={"avatar"}
               />
               <button
-                onClick={() => onSelectUser(user.username)}
                 className={"username"}
               >
                 {user.username}
