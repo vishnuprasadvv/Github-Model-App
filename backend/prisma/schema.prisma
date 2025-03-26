@@ -10,7 +10,7 @@ datasource db {
 model User {
   id             Int          @id @default(autoincrement())
   username       String       @unique
-  name           String
+  name           String?
   location       String?
   bio            String?
   blog           String?
@@ -24,6 +24,23 @@ model User {
   updatedAt      DateTime @updatedAt
   friends        Friendship[] @relation("UserFriends")
   friendOf       Friendship[] @relation("UserFriendOf")
+  repositories   Repository[]
+  followeringUrl  String?
+  followersUrl    String?
+
+}
+
+model Repository {
+   id          Int     @id @default(autoincrement())
+  repoId      Int     @unique // GitHub's repository ID
+  name        String
+  description String?
+  url         String
+  language    String?
+  stars       Int
+  forks       Int
+  userId      Int
+  user        User    @relation(fields: [userId], references: [id], onDelete :Cascade)  
 }
 
 model Friendship {

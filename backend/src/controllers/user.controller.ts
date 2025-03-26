@@ -28,9 +28,11 @@ export class UserController {
             res.status(200).json({message : 'User deleted'})
         } catch (error) {
             if (error instanceof Error) {
-                res.status(500).json({ error: error.message });
+                 res.status(500).json({ error: error.message });
+                 return;
             }
             res.status(500).json({ error: 'An unknown error occurred' });
+            return; 
         }
     };
 

@@ -2,12 +2,16 @@ export interface IUser {
     id: number;
   username: string;
   name: string;
-  avatar_url: string;
+  avatarUrl: string;
   bio: string;
   location: string;
-  public_repos: number;
-  followers: number;
-  following: number;
+  publicRepos: number;
+  publicGists : number;
+  followersCount: number;
+  followingCount: number;
+  repositories : IRepo[];
+  followersUrl : string;
+  followingUrl : string;
 }
 
 export interface IRepo {
@@ -21,6 +25,6 @@ export interface IRepo {
 
   export interface IFollower {
     id: number;
-    username: string;
+    login: string;
     avatar_url: string;
   }
