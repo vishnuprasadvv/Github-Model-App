@@ -10,7 +10,7 @@ import UserList from "./components/UserList";
 
 const BACKEND_API = import.meta.env.VITE_SERVER_URL;
 
-const API_URL = `http://${BACKEND_API}/api/users`;
+const API_URL = `${BACKEND_API}/api/users`;
 
 type ViewType = "search" | "repos" | "repoDetail" | "followers" | "userList";
 
