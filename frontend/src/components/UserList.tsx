@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IUser } from "../types";
 
-const API_URL = "http://localhost:3000/api/users";
+const BACKEND_API = import.meta.env.VITE_SERVER_URL;
+
+const API_URL = `${BACKEND_API}/api/users`;
 
 interface Props {
   onSelectUser: (username: string) => void;

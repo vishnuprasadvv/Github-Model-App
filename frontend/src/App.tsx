@@ -8,7 +8,9 @@ import RepoDetail from "./components/RepoDetails";
 import { useState } from "react";
 import UserList from "./components/UserList";
 
-const API_URL = "http://localhost:3000/api/users";
+const BACKEND_API = import.meta.env.VITE_SERVER_URL;
+
+const API_URL = `http://${BACKEND_API}/api/users`;
 
 type ViewType = "search" | "repos" | "repoDetail" | "followers" | "userList";
 
